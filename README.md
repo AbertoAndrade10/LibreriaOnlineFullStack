@@ -16,7 +16,7 @@ Con un enfoque en la usabilidad y la eficiencia, Librería Online busca brindar 
 - **EurekaServer**: Finalizado ✅
 - **ConfigServer**: Finalizado ✅
 - **BookMicroservice**: Finalizado (Test incluidos) ✅
-- **UserMicroservice**: En desarrollo ⏳
+- **UserMicroservice**: En desarrollo 🚧
 - **KafkaMicroservice**: Pendiente ⏳
 - **OrderMicroservice**: Pendiente ⏳
 - **PaymentMicroservice**: Pendiente ⏳
