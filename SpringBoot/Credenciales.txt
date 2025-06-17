@@ -1,0 +1,24 @@
+Docker postgres: 
+	- user: keycloak_user
+	- pass: keycloak_password
+
+
+
+ keycloak (port:9090):
+	- user: administrador
+	- pass: admin
+
+Docker keycloak (port:9090):
+	- user: keycloak_username
+	- pass: keycloak_passwprd
+
+
+
+	docker run --name keycloak_dev -p 9090:8080 \
+  -e KC_DB=postgres \
+  -e KC_DB_URL=jdbc:postgresql://localhost:5432/keycloak \
+  -e KC_DB_USERNAME=keycloak_user \
+  -e KC_DB_PASSWORD=keycloak_password \
+  -e KC_BOOTSTRAP_ADMIN_USERNAME=administrador \
+  -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
+  quay.io/keycloak/keycloak:latest start-dev

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/AbertoAndrade10/service-configuration
+          clone-on-start: true
+          default-label: main
+          username: AbertoAndrade10
+          password: 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
+
+server:
+  port: 8888
