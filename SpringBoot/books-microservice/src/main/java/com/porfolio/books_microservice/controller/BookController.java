@@ -2,7 +2,9 @@ package com.porfolio.books_microservice.controller;
 
 import org.springframework.data.domain.Pageable;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.porfolio.books_microservice.dto.BookCreationDTO;
 import com.porfolio.books_microservice.dto.BookDTO;
 import com.porfolio.books_microservice.service.IBookService;
@@ -26,9 +31,11 @@ import com.porfolio.books_microservice.service.IBookService;
 public class BookController {
 
     private final IBookService bookService;
+    private final Cloudinary cloudinary;
 
-    public BookController(IBookService bookService) {
+    public BookController(IBookService bookService, Cloudinary cloudinary) {
         this.bookService = bookService;
+        this.cloudinary = cloudinary;
     }
 
     /** CREATE a new book */
@@ -129,6 +136,26 @@ public class BookController {
     public ResponseEntity<List<BookDTO>> searchBooksByDescription(@RequestParam String description) {
         List<BookDTO> books = bookService.searchBooksByDescription(description);
         return ResponseEntity.ok(books);
+    }
+
+    @PatchMapping("/{id}/imagen")
+    public ResponseEntity<BookDTO> updateBookImage(@PathVariable String id, @RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body(null);
+
+        }
+
+        try {
+            @SuppressWarnings("rawtypes")
+            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            String imageUrl = (String) uploadResult.get("secure_url");
+
+            BookDTO updated = bookService.updateImage(id, imageUrl);
+            return ResponseEntity.ok(updated);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
 }

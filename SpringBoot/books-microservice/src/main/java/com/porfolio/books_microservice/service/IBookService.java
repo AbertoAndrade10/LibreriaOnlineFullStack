@@ -37,5 +37,7 @@ public interface IBookService {
 
     BookDTO searchBookByIsbn(String isbn) throws BookNotFoundException;
 
+    BookDTO updateImage(String id, String newImageUrl);
+
     List<BookDTO> searchBooksByDescription(String description);
 }

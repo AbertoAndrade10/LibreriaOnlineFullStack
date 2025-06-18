@@ -163,4 +163,12 @@ public class BookServiceImpl implements IBookService {
         return books.stream().map(mapperBooks::bookToBookDTO).collect(Collectors.toList());
     }
 
+    /** Upload Image by cloudinary */
+    @Override
+    public BookDTO updateImage(String id, String newImageUrl) {
+        Book book = bookRepository.findById(id).orElseThrow();
+        book.setImageUrl(newImageUrl);
+        return mapperBooks.bookToBookDTO(book);
+    }
+
 }
