@@ -15,7 +15,7 @@ Con un enfoque en la usabilidad y la eficiencia, Librería Online busca brindar 
 - **ApiGateway**: Funcional (Hay que implementar seguridad)⚒️
 - **EurekaServer**: Finalizado ✅
 - **ConfigServer**: Finalizado ✅
-- **BookMicroservice**: Finalizado (Test incluidos) ✅
+- **BookMicroservice**: Funcional (finalizando la implementación)⚒️
 - **UserMicroservice**: En desarrollo 🚧
 - **KafkaMicroservice**: Pendiente ⏳
 - **OrderMicroservice**: Pendiente ⏳
